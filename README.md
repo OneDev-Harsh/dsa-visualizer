@@ -1,36 +1,132 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
+
+# DSA Visualizer
+
+**Understand algorithms. One step at a time.**
+
+An interactive web application for learning data structures and algorithms through step-by-step visualizations, beginner-friendly explanations, and real code in 6 programming languages.
+
+[![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js&logoColor=white)](https://nextjs.org)
+[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)](https://react.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+
+</div>
+
+---
+
+## Features
+
+- **11 algorithms** across 6 categories: Sorting, Searching, Arrays, Strings, Stacks, and Recursion
+- **Step-by-step execution** — play, pause, step forward, or jump to any point in the algorithm
+- **Real code in 6 languages** — Python, JavaScript, TypeScript, Java, C, and C++ with syntax highlighting
+- **Pseudocode viewer** alongside the visualization
+- **Interactive input** — enter your own data or generate random inputs
+- **Beginner mode** — plain-English explanations for every step
+- **Practice problems** — curated LeetCode problems linked to each algorithm
+- **Mobile-first design** — works seamlessly on all screen sizes
+
+## Algorithms
+
+| Algorithm | Category | Difficulty | Time Complexity |
+|-----------|----------|------------|-----------------|
+| Bubble Sort | Sorting | Beginner | O(n^2) |
+| Selection Sort | Sorting | Beginner | O(n^2) |
+| Insertion Sort | Sorting | Beginner | O(n^2) |
+| Linear Search | Searching | Beginner | O(n) |
+| Binary Search | Searching | Beginner | O(log n) |
+| Array Reversal | Arrays | Beginner | O(n) |
+| String Reversal | Strings | Beginner | O(n) |
+| Palindrome Check | Strings | Beginner | O(n) |
+| Stack Operations | Stacks | Beginner | O(1) |
+| Factorial | Recursion | Beginner | O(n) |
+| Fibonacci | Recursion | Beginner | O(2^n) |
+
+## Tech Stack
+
+- **Framework:** [Next.js](https://nextjs.org) 16 (App Router)
+- **UI:** [React](https://react.dev) 19, [Tailwind CSS](https://tailwindcss.com) 4
+- **Animations:** [Framer Motion](https://www.framer.com/motion/)
+- **Syntax Highlighting:** [Prism.js](https://prismjs.com)
+- **Icons:** [Lucide React](https://lucide.dev)
+- **Fonts:** [Geist Sans](https://vercel.com/font) & [Geist Mono](https://vercel.com/font)
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+
+- npm, yarn, pnpm, or bun
+
+### Installation
+
+```bash
+git clone https://github.com/OneDev-Harsh/dsa-visualizer.git
+cd dsa-visualizer
+npm install
+```
+
+### Development
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm run start
+```
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+├── app/
+│   ├── layout.tsx              # Root layout with Navbar
+│   ├── page.tsx                # Landing page with live demo
+│   ├── globals.css             # Theme, Prism.js theme, utilities
+│   └── algorithms/
+│       ├── page.tsx            # Algorithm explorer (search + filter)
+│       └── [slug]/
+│           └── page.tsx        # Algorithm workspace (visualization + code)
+├── components/
+│   ├── layout/
+│   │   └── Navbar.tsx          # Fixed navbar with mobile menu
+│   ├── algorithm/
+│   │   ├── AlgorithmControls.tsx   # Play/pause/step/speed controls
+│   │   ├── CodeViewer.tsx          # Editor-style code display
+│   │   ├── PseudocodeViewer.tsx    # Pseudocode with active line
+│   │   ├── StepExplanation.tsx     # Current step details + beginner mode
+│   │   ├── InputEditor.tsx         # Custom input editor
+│   │   └── PracticeProblems.tsx    # LeetCode problem links
+│   └── visualizations/
+│       ├── SortingVisualizer.tsx   # Animated bar chart
+│       ├── SearchVisualizer.tsx    # Cell-based with range indicators
+│       ├── ArrayVisualizer.tsx     # Generic array cells
+│       └── StackVisualizer.tsx     # Vertical stack with push/pop animations
+└── lib/
+    ├── algorithms/
+    │   ├── types.ts            # TypeScript types
+    │   ├── registry.ts         # All algorithm definitions + code
+    │   └── {category}/         # Step generators per algorithm
+    └── execution/
+        └── execution-engine.ts # Playback state machine
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Adding a New Algorithm
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Create a step generator in `src/lib/algorithms/{category}/`
+2. Define the algorithm in `src/lib/algorithms/registry.ts` with code, pseudocode, explanation, and practice problems
+3. The visualization auto-routes based on `visualizationType`
 
-## Deploy on Vercel
+## Contributing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Contributions are welcome. Open an issue or submit a pull request.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+
+MIT
