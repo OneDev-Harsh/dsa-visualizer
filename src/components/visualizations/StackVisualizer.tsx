@@ -44,10 +44,11 @@ export default function StackVisualizer({
         <div
           className={`
             relative flex flex-col-reverse items-center gap-0
-            min-w-[200px] w-full max-w-[320px]
+            min-w-[160px] w-full max-w-[280px]
             border border-[#222226] rounded-b-xl
             bg-[#1e1e22]/50
             pl-1
+            sm:min-w-[200px] sm:max-w-[320px]
             ${isEmpty ? 'border-dashed' : ''}
           `}
         >
@@ -91,10 +92,11 @@ export default function StackVisualizer({
                       className={`
                         relative w-full
                         flex items-center justify-center
-                        px-4 py-3
+                        px-3 py-2.5
                         border rounded-lg
-                        font-mono text-sm font-semibold
+                        font-mono text-xs font-semibold
                         transition-colors duration-200
+                        sm:px-4 sm:py-3 sm:text-sm
                         ${
                           isTop && highlightTop
                             ? 'bg-primary/20 border-primary text-primary z-10'
@@ -163,7 +165,7 @@ export default function StackVisualizer({
           </div>
         </div>
 
-        <div className="w-full max-w-[320px] h-2 bg-[#222226] rounded-b-xl" />
+        <div className="w-full max-w-[280px] h-2 bg-[#222226] rounded-b-xl sm:max-w-[320px]" />
       </div>
 
       {/* Pop notification */}

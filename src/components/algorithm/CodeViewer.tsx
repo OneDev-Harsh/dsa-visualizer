@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { Copy, Check, FileCode } from 'lucide-react';
 import Prism from 'prismjs';
 import 'prismjs/components/prism-python';
@@ -44,9 +44,11 @@ export default function CodeViewer({ code, activeLine, language }: CodeViewerPro
     return 0;
   });
   const codeRef = useRef<HTMLPreElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const currentCode = code[activeTab];
   const langKey = currentCode?.language ?? '';
+  const lines = useMemo(() => currentCode?.code.split('\n') ?? [], [currentCode]);
 
   useEffect(() => {
     if (codeRef.current && currentCode) {
@@ -55,11 +57,10 @@ export default function CodeViewer({ code, activeLine, language }: CodeViewerPro
   }, [currentCode, activeLine]);
 
   useEffect(() => {
-    if (codeRef.current && activeLine) {
-      const lineEl = codeRef.current.querySelector(`[data-line="${activeLine}"]`);
-      if (lineEl) {
-        lineEl.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-      }
+    if (containerRef.current && activeLine) {
+      const lineHeight = 24;
+      const targetScroll = (activeLine - 1) * lineHeight - containerRef.current.clientHeight / 3;
+      containerRef.current.scrollTo({ top: Math.max(0, targetScroll), behavior: 'smooth' });
     }
   }, [activeLine]);
 
@@ -70,20 +71,19 @@ export default function CodeViewer({ code, activeLine, language }: CodeViewerPro
     setTimeout(() => setCopied(false), 2000);
   }, [currentCode]);
 
-  const lines = currentCode?.code.split('\n') ?? [];
-
   return (
-    <div className="bg-[#141416] border border-[#1e1e22] rounded-xl overflow-hidden">
-      <div className="flex items-center bg-[#111114] border-b border-[#1e1e22]">
+    <div className="bg-[#1a1b26] border border-[#1e1e22] rounded-xl overflow-hidden font-mono text-[13px]">
+      {/* Tab bar */}
+      <div className="flex items-center bg-[#16161e] border-b border-[#1e1e22]">
         <div className="flex-1 flex overflow-x-auto">
           {code.map((item, i) => (
             <button
               key={item.language}
               onClick={() => setActiveTab(i)}
-              className={`flex items-center gap-1.5 px-3 py-2 text-[13px] font-medium border-b-2 transition-colors whitespace-nowrap ${
+              className={`flex items-center gap-1.5 px-3 py-2 text-xs font-medium border-b-2 transition-colors whitespace-nowrap ${
                 i === activeTab
-                  ? 'text-[#3b82f6] border-[#3b82f6] bg-[#3b82f6]/5'
-                  : 'border-transparent text-[#6b6b76] hover:text-[#ececec] hover:bg-[#141416]'
+                  ? 'text-[#7aa2f7] border-[#7aa2f7] bg-[#7aa2f7]/5'
+                  : 'border-transparent text-[#565f89] hover:text-[#c0caf5] hover:bg-[#1a1b26]'
               }`}
             >
               <FileCode className="w-3.5 h-3.5" />
@@ -94,50 +94,70 @@ export default function CodeViewer({ code, activeLine, language }: CodeViewerPro
         <button
           onClick={handleCopy}
           aria-label="Copy code"
-          className="p-2 mr-1 rounded-lg text-[#6b6b76] hover:text-[#ececec] hover:bg-[#141416] transition-colors"
+          className="p-2 mr-1 rounded-lg text-[#565f89] hover:text-[#c0caf5] hover:bg-[#1a1b26] transition-colors"
         >
-          {copied ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
+          {copied ? (
+            <Check className="w-4 h-4 text-[#9ece6a]" />
+          ) : (
+            <Copy className="w-4 h-4" />
+          )}
         </button>
       </div>
 
-      <div className="relative overflow-auto max-h-[520px]">
-        {activeLine && (
-          <div className="absolute inset-x-0 top-0 h-8 bg-gradient-to-b from-[#3b82f6]/8 to-transparent pointer-events-none transition-opacity duration-300" />
-        )}
-        <pre className="m-0 p-0">
-          <code ref={codeRef} className={`language-${LANG_PRISM[langKey] ?? ''}`}>
-            <table className="w-full border-collapse">
-              <tbody>
-                {lines.map((line, i) => {
-                  const lineNum = i + 1;
-                  const isActive = activeLine === lineNum;
-                  return (
-                    <tr
-                      key={i}
-                      data-line={lineNum}
-                      className={`transition-all duration-200 ${
-                        isActive ? 'bg-[#3b82f6]/10' : ''
-                      }`}
-                    >
-                      <td
-                        className={`select-none text-right pr-4 pl-4 py-0 text-[11px] font-mono w-[1%] whitespace-nowrap align-top border-l-2 transition-colors duration-200 ${
-                          isActive
-                            ? 'text-[#3a3a42] border-l-[#3b82f6]'
-                            : 'text-[#3a3a42] border-l-transparent'
-                        }`}
-                      >
-                        {lineNum}
-                      </td>
-                      <td className="pr-4 py-0 align-top font-mono text-[13px] leading-[1.8]">
-                        <span className="whitespace-pre">{line || ' '}</span>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </code>
-        </pre>
+      {/* Code area with line numbers */}
+      <div
+        ref={containerRef}
+        className="overflow-auto max-h-[350px] sm:max-h-[520px]"
+      >
+        <div className="flex min-w-max">
+          {/* Line numbers gutter */}
+          <div className="flex-shrink-0 py-3 pl-3 pr-2 text-right select-none border-r border-[#1e1e22]/50 bg-[#16161e]/50">
+            {lines.map((_, i) => {
+              const lineNum = i + 1;
+              const isActive = activeLine === lineNum;
+              return (
+                <div
+                  key={i}
+                  className={`px-2 leading-[24px] text-[11px] transition-colors duration-150 ${
+                    isActive
+                      ? 'text-[#c0caf5] bg-[#7aa2f7]/10 border-l-2 border-l-[#7aa2f7] -ml-[2px] pl-[6px]'
+                      : 'text-[#3b4261] border-l-2 border-l-transparent -ml-[2px] pl-[6px]'
+                  }`}
+                >
+                  {lineNum}
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Code block */}
+          <div className="flex-1 overflow-x-auto">
+            <pre className="m-0 p-3 bg-transparent" style={{ background: 'transparent' }}>
+              <code
+                ref={codeRef}
+                className={`language-${LANG_PRISM[langKey] ?? ''}`}
+                style={{
+                  fontFamily: "'Geist Mono', 'Fira Code', 'JetBrains Mono', 'Cascadia Code', Consolas, monospace",
+                  fontSize: '13px',
+                  lineHeight: '24px',
+                  background: 'transparent',
+                }}
+              >
+                {currentCode?.code ?? ''}
+              </code>
+            </pre>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom status bar */}
+      <div className="flex items-center justify-between px-3 py-1.5 bg-[#16161e] border-t border-[#1e1e22] text-[10px] text-[#3b4261]">
+        <span>
+          {lines.length} lines
+        </span>
+        <span className="uppercase tracking-wider">
+          {LANG_LABELS[langKey] ?? langKey}
+        </span>
       </div>
     </div>
   );

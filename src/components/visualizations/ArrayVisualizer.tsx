@@ -84,7 +84,7 @@ export default function ArrayVisualizer({
 }: ArrayVisualizerProps) {
   return (
     <div className="flex flex-col items-center gap-2 w-full overflow-x-auto pb-4">
-      <div className="flex items-end gap-1.5 sm:gap-2 min-w-max px-4">
+      <div className="flex items-end gap-1 min-w-max px-2 sm:gap-1.5 sm:px-4">
         <AnimatePresence mode="popLayout">
           {items.map((item, index) => {
             const pointerLabel = getPointerLabel(index, pointers);
@@ -129,10 +129,10 @@ export default function ArrayVisualizer({
                 <motion.div
                   layout
                   className={`
-                    relative w-12 h-14 sm:w-14 sm:h-16
+                    relative w-10 h-12 sm:w-12 sm:h-14 md:w-14 md:h-16
                     flex items-center justify-center
                     border rounded-lg
-                    font-mono text-sm sm:text-base font-semibold
+                    font-mono text-xs sm:text-sm md:text-base font-semibold
                     transition-colors duration-200
                     ${getItemStyle(index, highlightedIndices, comparedIndices, swappedIndices, sortedIndices, activeIndex)}
                     ${getRingStyle(index, activeIndex)}

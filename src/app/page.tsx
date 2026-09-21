@@ -9,7 +9,7 @@ import {
   Search,
   Layers,
   Code2,
-  Sparkles,
+
   BarChart3,
   BookOpen,
   GitBranch,
@@ -147,7 +147,7 @@ function LiveSortingDemo() {
       if (i >= n - 1) {
         setSortedIdx((prev) => new Set([...prev, 0]));
         setDone(true);
-        setStatus('Sorted ✓');
+        setStatus('Sorted');
         clearInterval(id);
         return;
       }
@@ -160,7 +160,7 @@ function LiveSortingDemo() {
             return next;
           });
           setDone(true);
-          setStatus('Sorted ✓');
+          setStatus('Sorted');
           clearInterval(id);
           return;
         }
@@ -195,15 +195,15 @@ function LiveSortingDemo() {
   return (
     <div className="rounded-xl border border-[#1e1e22] bg-[#0c0c0e] overflow-hidden shadow-2xl shadow-black/40">
       {/* Terminal chrome */}
-      <div className="flex items-center gap-2 border-b border-[#1e1e22] bg-[#111113] px-4 py-2.5">
-        <span className="h-3 w-3 rounded-full bg-[#ff5f57]" />
-        <span className="h-3 w-3 rounded-full bg-[#febc2e]" />
-        <span className="h-3 w-3 rounded-full bg-[#28c840]" />
-        <span className="ml-3 font-mono text-xs text-[#6b6b76]">bubble_sort.py</span>
+      <div className="flex items-center gap-2 border-b border-[#1e1e22] bg-[#111113] px-3 py-2 sm:px-4 sm:py-2.5">
+        <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57] sm:h-3 sm:w-3" />
+        <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e] sm:h-3 sm:w-3" />
+        <span className="h-2.5 w-2.5 rounded-full bg-[#28c840] sm:h-3 sm:w-3" />
+        <span className="ml-2 font-mono text-[10px] text-[#6b6b76] sm:ml-3 sm:text-xs">bubble_sort.py</span>
       </div>
 
       {/* Bars */}
-      <div className="flex items-end justify-center gap-2 px-6 pt-8 pb-4" style={{ minHeight: 180 }}>
+      <div className="flex items-end justify-center gap-1.5 px-4 pt-6 pb-3 sm:gap-2 sm:px-6 sm:pt-8 sm:pb-4" style={{ minHeight: 140 }}>
         {arr.map((val, idx) => {
           const isCompare = compareIdx.includes(idx);
           const isSorted = sortedIdx.has(idx);
@@ -219,25 +219,25 @@ function LiveSortingDemo() {
               key={idx}
               layout
               transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-              className="relative flex flex-col items-center gap-1.5"
+              className="relative flex flex-col items-center gap-1"
             >
               <motion.div
-                className="w-10 rounded-t-md"
+                className="w-7 rounded-t-md sm:w-10"
                 style={{ backgroundColor: barColor }}
-                animate={{ height: (val / maxVal) * 100 + 20 }}
+                animate={{ height: (val / maxVal) * 80 + 16 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 25 }}
               />
-              <span className="font-mono text-[10px] text-[#6b6b76]">{val}</span>
+              <span className="font-mono text-[9px] text-[#6b6b76] sm:text-[10px]">{val}</span>
             </motion.div>
           );
         })}
       </div>
 
       {/* Status line */}
-      <div className="border-t border-[#1e1e22] bg-[#111113] px-4 py-2 font-mono text-[11px] text-[#6b6b76]">
+      <div className="border-t border-[#1e1e22] bg-[#111113] px-3 py-1.5 font-mono text-[10px] text-[#6b6b76] sm:px-4 sm:py-2 sm:text-[11px]">
         <span className="text-[#22c55e]">$</span>{' '}
         <span className="text-[#ececec]">{status}</span>
-        <span className="ml-2 opacity-40">[{arr.join(', ')}]</span>
+        <span className="ml-1 opacity-40 sm:ml-2">[{arr.join(', ')}]</span>
       </div>
     </div>
   );
@@ -253,31 +253,21 @@ export default function HomePage() {
       {/* ============================================================ */}
       {/*  HERO                                                        */}
       {/* ============================================================ */}
-      <section className="relative overflow-hidden px-6 pt-24 pb-20 lg:pt-32 lg:pb-28">
+      <section className="relative overflow-hidden px-4 pt-16 pb-14 sm:px-6 sm:pt-24 sm:pb-20 lg:pt-32 lg:pb-28">
         {/* dot-grid + orbs */}
         <div className="pointer-events-none absolute inset-0 dot-grid opacity-40" />
         <div className="pointer-events-none absolute -left-32 top-1/4 h-[500px] w-[500px] rounded-full bg-[#3b82f6] opacity-[0.06] blur-[120px]" />
         <div className="pointer-events-none absolute -right-24 top-1/2 h-[400px] w-[400px] rounded-full bg-[#8b5cf6] opacity-[0.05] blur-[100px]" />
 
         <div className="relative z-10 mx-auto max-w-7xl">
-          <div className="grid items-center gap-12 lg:grid-cols-[1fr,420px]">
+          <div className="grid items-center gap-8 sm:gap-12 lg:grid-cols-[1fr,420px]">
             {/* Left copy */}
             <div className="max-w-2xl">
-              <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="mb-6 inline-flex items-center gap-1.5 rounded-full border border-[#1e1e22] bg-[#141416] px-3 py-1 text-xs text-[#6b6b76]"
-              >
-                <Sparkles className="h-3 w-3 text-[#f59e0b]" />
-                Free, open-source, beginner-first
-              </motion.div>
-
               <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.55, delay: 0.08 }}
-                className="text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl"
+                className="text-3xl font-bold leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl"
               >
                 Understand algorithms.
                 <br />
@@ -288,7 +278,7 @@ export default function HomePage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.55, delay: 0.16 }}
-                className="mt-5 max-w-lg text-[15px] leading-relaxed text-[#8e8e9a] sm:text-base"
+                className="mt-4 max-w-lg text-sm leading-relaxed text-[#8e8e9a] sm:mt-5 sm:text-base"
               >
                 Not another algorithm tutorial. This is a visual workspace where you run
                 the code, see every step, and actually get it.
@@ -298,18 +288,18 @@ export default function HomePage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.55, delay: 0.24 }}
-                className="mt-8 flex flex-wrap items-center gap-3"
+                className="mt-6 flex flex-wrap items-center gap-3 sm:mt-8"
               >
                 <Link
                   href="/algorithms"
-                  className="btn-press focus-ring inline-flex items-center gap-2 rounded-lg bg-[#3b82f6] px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[#2563eb]"
+                  className="btn-press focus-ring inline-flex items-center gap-2 rounded-lg bg-[#3b82f6] px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[#2563eb] sm:px-5"
                 >
                   Explore algorithms
                   <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link
                   href="#how-it-works"
-                  className="btn-press focus-ring inline-flex items-center gap-2 rounded-lg border border-[#1e1e22] bg-transparent px-5 py-2.5 text-sm font-medium text-[#ececec] transition-colors hover:bg-[#141416] hover:border-[#333338]"
+                  className="btn-press focus-ring inline-flex items-center gap-2 rounded-lg border border-[#1e1e22] bg-transparent px-4 py-2.5 text-sm font-medium text-[#ececec] transition-colors hover:bg-[#141416] hover:border-[#333338] sm:px-5"
                 >
                   How it works
                 </Link>
@@ -320,7 +310,7 @@ export default function HomePage() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.45 }}
-                className="mt-10 flex items-center gap-5 text-xs text-[#6b6b76]"
+                className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-[#6b6b76] sm:mt-10"
               >
                 <span className="flex items-center gap-1.5">
                   <Hash className="h-3.5 w-3.5" />
@@ -344,7 +334,6 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.3 }}
-              className="hidden lg:block"
             >
               <LiveSortingDemo />
             </motion.div>
@@ -355,9 +344,9 @@ export default function HomePage() {
       {/* ============================================================ */}
       {/*  HOW IT WORKS                                                */}
       {/* ============================================================ */}
-      <section id="how-it-works" className="border-t border-[#1e1e22] px-6 py-24">
+      <section id="how-it-works" className="border-t border-[#1e1e22] px-4 py-14 sm:px-6 sm:py-24">
         <div className="mx-auto max-w-6xl">
-          <div className="mb-14 max-w-xl">
+          <div className="mb-10 max-w-xl sm:mb-14">
             <motion.span
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -371,14 +360,14 @@ export default function HomePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.08 }}
-              className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl"
+              className="mt-3 text-2xl font-bold tracking-tight sm:text-4xl"
             >
               Four steps to{' '}
               <span className="text-[#6b6b76]">actually getting it</span>
             </motion.h2>
           </div>
 
-          <div className="grid gap-5 sm:grid-cols-2">
+          <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
             {steps.map((step, idx) => (
               <motion.div
                 key={step.title}
@@ -386,31 +375,31 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ duration: 0.45, delay: idx * 0.08 }}
-                className="group relative rounded-xl border border-[#1e1e22] bg-[#141416] p-6 transition-colors hover:bg-[#1a1a1e] hover:border-[#333338]"
+                className="group relative rounded-xl border border-[#1e1e22] bg-[#141416] p-4 transition-colors hover:bg-[#1a1a1e] hover:border-[#333338] sm:p-6"
               >
                 {/* Big faded step number */}
                 <span
-                  className="pointer-events-none absolute right-5 top-4 font-mono text-5xl font-bold opacity-[0.04] select-none"
+                  className="pointer-events-none absolute right-4 top-3 font-mono text-4xl font-bold opacity-[0.04] select-none sm:right-5 sm:top-4 sm:text-5xl"
                   aria-hidden
                 >
                   {String(idx + 1).padStart(2, '0')}
                 </span>
 
                 <div
-                  className="mb-4 flex h-10 w-10 items-center justify-center rounded-lg"
+                  className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg sm:mb-4 sm:h-10 sm:w-10"
                   style={{ backgroundColor: `${step.color}18`, color: step.color }}
                 >
-                  <step.icon className="h-5 w-5" />
+                  <step.icon className="h-4 w-4 sm:h-5 sm:w-5" />
                 </div>
 
-                <h3 className="text-[15px] font-semibold">{step.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-[#8e8e9a]">
+                <h3 className="text-sm font-semibold sm:text-[15px]">{step.title}</h3>
+                <p className="mt-1.5 text-xs leading-relaxed text-[#8e8e9a] sm:mt-2 sm:text-sm">
                   {step.description}
                 </p>
 
                 {/* Tiny color dot indicator */}
                 <div
-                  className="absolute bottom-4 right-4 h-1.5 w-1.5 rounded-full opacity-60"
+                  className="absolute bottom-3 right-3 h-1.5 w-1.5 rounded-full opacity-60 sm:bottom-4 sm:right-4"
                   style={{ backgroundColor: step.color }}
                 />
               </motion.div>
@@ -422,9 +411,9 @@ export default function HomePage() {
       {/* ============================================================ */}
       {/*  FEATURED ALGORITHMS                                         */}
       {/* ============================================================ */}
-      <section className="border-t border-[#1e1e22] px-6 py-24">
+      <section className="border-t border-[#1e1e22] px-4 py-14 sm:px-6 sm:py-24">
         <div className="mx-auto max-w-6xl">
-          <div className="mb-12 flex items-end justify-between">
+          <div className="mb-8 flex items-end justify-between sm:mb-12">
             <div className="max-w-xl">
               <motion.span
                 initial={{ opacity: 0 }}
@@ -439,7 +428,7 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.08 }}
-                className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl"
+                className="mt-3 text-2xl font-bold tracking-tight sm:text-4xl"
               >
                 Start here
               </motion.h2>
@@ -460,7 +449,7 @@ export default function HomePage() {
             </motion.div>
           </div>
 
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
             {featuredAlgorithms.map((algo, idx) => (
               <motion.div
                 key={algo.slug}
@@ -471,7 +460,7 @@ export default function HomePage() {
               >
                 <Link
                   href={`/algorithms/${algo.slug}`}
-                  className="group block h-full rounded-xl border border-[#1e1e22] bg-[#141416] p-6 transition-all hover:bg-[#1a1a1e] hover:border-[#333338] hover:shadow-lg hover:shadow-[#3b82f6]/[0.04]"
+                  className="group block h-full rounded-xl border border-[#1e1e22] bg-[#141416] p-4 transition-all hover:bg-[#1a1a1e] hover:border-[#333338] hover:shadow-lg hover:shadow-[#3b82f6]/[0.04] sm:p-6"
                 >
                   <div className="flex items-center gap-2">
                     <span className="rounded-md bg-[#8b5cf618] px-2 py-0.5 text-[11px] font-medium text-[#8b5cf6]">
@@ -482,18 +471,18 @@ export default function HomePage() {
                     </span>
                   </div>
 
-                  <div className="mt-4 flex items-center gap-2.5">
+                  <div className="mt-3 flex items-center gap-2 sm:mt-4">
                     <Terminal className="h-4 w-4 text-[#6b6b76]" />
-                    <h3 className="text-base font-semibold transition-colors group-hover:text-[#3b82f6]">
+                    <h3 className="text-sm font-semibold transition-colors group-hover:text-[#3b82f6] sm:text-base">
                       {algo.name}
                     </h3>
                   </div>
 
-                  <p className="mt-2 text-sm leading-relaxed text-[#8e8e9a]">
+                  <p className="mt-1.5 text-xs leading-relaxed text-[#8e8e9a] sm:mt-2 sm:text-sm">
                     {algo.tagline}
                   </p>
 
-                  <div className="mt-5 inline-flex items-center gap-1 text-sm font-medium text-[#3b82f6] transition-all group-hover:gap-2">
+                  <div className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-[#3b82f6] transition-all group-hover:gap-2 sm:mt-5">
                     Visualize
                     <ArrowRight className="h-3.5 w-3.5" />
                   </div>
@@ -507,9 +496,9 @@ export default function HomePage() {
       {/* ============================================================ */}
       {/*  FEATURES GRID                                               */}
       {/* ============================================================ */}
-      <section className="border-t border-[#1e1e22] px-6 py-24">
+      <section className="border-t border-[#1e1e22] px-4 py-14 sm:px-6 sm:py-24">
         <div className="mx-auto max-w-6xl">
-          <div className="mb-14 max-w-xl">
+          <div className="mb-10 max-w-xl sm:mb-14">
             <motion.span
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -523,14 +512,14 @@ export default function HomePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.08 }}
-              className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl"
+              className="mt-3 text-2xl font-bold tracking-tight sm:text-4xl"
             >
               Built for people who learn{' '}
               <span className="text-[#6b6b76]">by doing</span>
             </motion.h2>
           </div>
 
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
             {features.map((feat, idx) => (
               <motion.div
                 key={feat.title}
@@ -538,13 +527,13 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ duration: 0.45, delay: idx * 0.06 }}
-                className="rounded-xl border border-[#1e1e22] bg-[#141416] p-6 transition-colors hover:bg-[#1a1a1e] hover:border-[#333338]"
+                className="rounded-xl border border-[#1e1e22] bg-[#141416] p-4 transition-colors hover:bg-[#1a1a1e] hover:border-[#333338] sm:p-6"
               >
-                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#3b82f612] text-[#3b82f6]">
-                  <feat.icon className="h-4.5 w-4.5" />
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#3b82f612] text-[#3b82f6] sm:h-9 sm:w-9">
+                  <feat.icon className="h-4 w-4" />
                 </div>
-                <h3 className="mt-3.5 text-[15px] font-semibold">{feat.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-[#8e8e9a]">
+                <h3 className="mt-3 text-sm font-semibold sm:text-[15px]">{feat.title}</h3>
+                <p className="mt-1.5 text-xs leading-relaxed text-[#8e8e9a] sm:mt-2 sm:text-sm">
                   {feat.body}
                 </p>
               </motion.div>
@@ -556,9 +545,9 @@ export default function HomePage() {
       {/* ============================================================ */}
       {/*  FOOTER                                                      */}
       {/* ============================================================ */}
-      <footer className="border-t border-[#1e1e22] px-6 py-10">
+      <footer className="border-t border-[#1e1e22] px-4 py-8 sm:px-6 sm:py-10">
         <div className="mx-auto max-w-6xl">
-          <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
+          <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center sm:gap-6">
             {/* Left */}
             <div className="flex items-center gap-2.5">
               <div className="flex h-7 w-7 items-center justify-center rounded-md bg-[#3b82f6]">
@@ -571,7 +560,7 @@ export default function HomePage() {
             </div>
 
             {/* Right */}
-            <div className="flex items-center gap-5">
+            <div className="flex items-center gap-4 sm:gap-5">
               <Link
                 href="/algorithms"
                 className="text-sm text-[#6b6b76] transition-colors hover:text-[#ececec]"
@@ -589,7 +578,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="mt-8 text-[11px] text-[#3a3a42]">
+          <div className="mt-6 text-[11px] text-[#3a3a42] sm:mt-8">
             &copy; {new Date().getFullYear()} DSA Visualizer
           </div>
         </div>

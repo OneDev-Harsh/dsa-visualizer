@@ -66,11 +66,11 @@ export default function InputEditor({
   };
 
   return (
-    <div className="bg-[#0a0a0c] border border-[#1e1e22] rounded-lg p-4 space-y-3">
-      <div className="space-y-3">
+    <div className="bg-[#0a0a0c] border border-[#1e1e22] rounded-lg p-3 space-y-2.5 sm:p-4 sm:space-y-3">
+      <div className="space-y-2.5 sm:space-y-3">
         {(inputType === 'array' || inputType === 'search') && (
           <div>
-            <label className="block text-xs font-medium text-[#6b6b76] mb-1.5">
+            <label className="block text-xs font-medium text-[#6b6b76] mb-1 sm:mb-1.5">
               Enter array (comma-separated)
             </label>
             <input
@@ -78,14 +78,14 @@ export default function InputEditor({
               value={arrayText}
               onChange={(e) => setArrayText(e.target.value)}
               placeholder="e.g. 64, 34, 25, 12, 22, 11, 90"
-              className="w-full bg-[#141416] border border-[#1e1e22] rounded-lg px-3 py-2.5 text-sm text-[#ececec] placeholder:text-[#4a4a56] focus:outline-none focus:border-[#3b82f6] focus:ring-1 focus:ring-[#3b82f6]/20 transition-all"
+              className="w-full bg-[#141416] border border-[#1e1e22] rounded-lg px-3 py-2 text-sm text-[#ececec] placeholder:text-[#4a4a56] focus:outline-none focus:border-[#3b82f6] focus:ring-1 focus:ring-[#3b82f6]/20 transition-all sm:py-2.5"
             />
           </div>
         )}
 
         {inputType === 'search' && (
           <div>
-            <label className="block text-xs font-medium text-[#6b6b76] mb-1.5">
+            <label className="block text-xs font-medium text-[#6b6b76] mb-1 sm:mb-1.5">
               Target value
             </label>
             <input
@@ -93,14 +93,14 @@ export default function InputEditor({
               value={targetText}
               onChange={(e) => setTargetText(e.target.value)}
               placeholder="e.g. 22"
-              className="w-full bg-[#141416] border border-[#1e1e22] rounded-lg px-3 py-2.5 text-sm text-[#ececec] placeholder:text-[#4a4a56] focus:outline-none focus:border-[#3b82f6] focus:ring-1 focus:ring-[#3b82f6]/20 transition-all"
+              className="w-full bg-[#141416] border border-[#1e1e22] rounded-lg px-3 py-2 text-sm text-[#ececec] placeholder:text-[#4a4a56] focus:outline-none focus:border-[#3b82f6] focus:ring-1 focus:ring-[#3b82f6]/20 transition-all sm:py-2.5"
             />
           </div>
         )}
 
         {inputType === 'string' && (
           <div>
-            <label className="block text-xs font-medium text-[#6b6b76] mb-1.5">
+            <label className="block text-xs font-medium text-[#6b6b76] mb-1 sm:mb-1.5">
               Enter string
             </label>
             <input
@@ -108,14 +108,14 @@ export default function InputEditor({
               value={stringValue}
               onChange={(e) => setStringValue(e.target.value)}
               placeholder="e.g. hello world"
-              className="w-full bg-[#141416] border border-[#1e1e22] rounded-lg px-3 py-2.5 text-sm text-[#ececec] placeholder:text-[#4a4a56] focus:outline-none focus:border-[#3b82f6] focus:ring-1 focus:ring-[#3b82f6]/20 transition-all"
+              className="w-full bg-[#141416] border border-[#1e1e22] rounded-lg px-3 py-2 text-sm text-[#ececec] placeholder:text-[#4a4a56] focus:outline-none focus:border-[#3b82f6] focus:ring-1 focus:ring-[#3b82f6]/20 transition-all sm:py-2.5"
             />
           </div>
         )}
 
         {inputType === 'stack' && (
           <div>
-            <label className="block text-xs font-medium text-[#6b6b76] mb-1.5">
+            <label className="block text-xs font-medium text-[#6b6b76] mb-1 sm:mb-1.5">
               Stack operations (comma-separated numbers to push)
             </label>
             <input
@@ -123,14 +123,14 @@ export default function InputEditor({
               value={arrayText}
               onChange={(e) => setArrayText(e.target.value)}
               placeholder="e.g. 10, 20, 30"
-              className="w-full bg-[#141416] border border-[#1e1e22] rounded-lg px-3 py-2.5 text-sm text-[#ececec] placeholder:text-[#4a4a56] focus:outline-none focus:border-[#3b82f6] focus:ring-1 focus:ring-[#3b82f6]/20 transition-all"
+              className="w-full bg-[#141416] border border-[#1e1e22] rounded-lg px-3 py-2 text-sm text-[#ececec] placeholder:text-[#4a4a56] focus:outline-none focus:border-[#3b82f6] focus:ring-1 focus:ring-[#3b82f6]/20 transition-all sm:py-2.5"
             />
           </div>
         )}
 
         {inputType === 'recursion' && (
           <div>
-            <label className="block text-xs font-medium text-[#6b6b76] mb-1.5">
+            <label className="block text-xs font-medium text-[#6b6b76] mb-1 sm:mb-1.5">
               Value of n
             </label>
             <input
@@ -139,7 +139,7 @@ export default function InputEditor({
               onChange={(e) => setRecursionN(Number(e.target.value))}
               min={1}
               max={20}
-              className="w-full bg-[#141416] border border-[#1e1e22] rounded-lg px-3 py-2.5 text-sm text-[#ececec] placeholder:text-[#4a4a56] focus:outline-none focus:border-[#3b82f6] focus:ring-1 focus:ring-[#3b82f6]/20 transition-all"
+              className="w-full bg-[#141416] border border-[#1e1e22] rounded-lg px-3 py-2 text-sm text-[#ececec] placeholder:text-[#4a4a56] focus:outline-none focus:border-[#3b82f6] focus:ring-1 focus:ring-[#3b82f6]/20 transition-all sm:py-2.5"
             />
           </div>
         )}
@@ -147,22 +147,22 @@ export default function InputEditor({
 
       {error && <p className="text-[#ef4444] text-xs mt-1">{error}</p>}
 
-      <div className="flex gap-2">
+      <div className="flex flex-wrap gap-2">
         <button
           onClick={handleApply}
-          className="px-4 py-2 bg-[#3b82f6] text-white text-sm font-medium rounded-lg hover:bg-[#2563eb] btn-press transition-colors"
+          className="px-3 py-2 bg-[#3b82f6] text-white text-sm font-medium rounded-lg hover:bg-[#2563eb] btn-press transition-colors sm:px-4"
         >
           Apply Input
         </button>
         <button
           onClick={onGenerateRandom}
-          className="px-4 py-2 bg-[#141416] border border-[#1e1e22] text-[#8e8e9a] text-sm rounded-lg hover:border-[#333338] hover:text-[#ececec] btn-press transition-colors"
+          className="px-3 py-2 bg-[#141416] border border-[#1e1e22] text-[#8e8e9a] text-sm rounded-lg hover:border-[#333338] hover:text-[#ececec] btn-press transition-colors sm:px-4"
         >
           Random
         </button>
         <button
           onClick={handleReset}
-          className="flex items-center gap-1.5 px-4 py-2 bg-[#141416] border border-[#1e1e22] text-[#8e8e9a] text-sm rounded-lg hover:border-[#333338] hover:text-[#ececec] btn-press transition-colors"
+          className="flex items-center gap-1.5 px-3 py-2 bg-[#141416] border border-[#1e1e22] text-[#8e8e9a] text-sm rounded-lg hover:border-[#333338] hover:text-[#ececec] btn-press transition-colors sm:px-4"
         >
           <RotateCcw className="w-3.5 h-3.5" />
           Reset

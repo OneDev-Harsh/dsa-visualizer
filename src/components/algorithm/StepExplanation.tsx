@@ -81,7 +81,7 @@ export default function StepExplanation({ step, beginnerMode }: StepExplanationP
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -8 }}
         transition={{ duration: 0.25 }}
-        className="bg-[#141416] border border-[#1e1e22] rounded-xl border-l-2 border-l-[#3b82f6] p-4 space-y-3"
+        className="bg-[#141416] border border-[#1e1e22] rounded-xl border-l-2 border-l-[#3b82f6] p-3 space-y-2 sm:p-4 sm:space-y-3"
       >
         <div>
           <h3 className="text-sm font-semibold text-[#ececec] flex items-center gap-2">
@@ -92,10 +92,10 @@ export default function StepExplanation({ step, beginnerMode }: StepExplanationP
         </div>
 
         {beginnerMode && step.detailedExplanation && (
-          <div className="bg-[#0f2544]/50 border border-[#3b82f6]/20 rounded-lg p-3">
-            <div className="flex items-start gap-2">
-              <Lightbulb className="w-4 h-4 text-[#3b82f6] mt-0.5 shrink-0" />
-              <p className="text-sm text-[#8e8e9a] leading-relaxed">
+          <div className="bg-[#0f2544]/50 border border-[#3b82f6]/20 rounded-lg p-2.5 sm:p-3">
+            <div className="flex items-start gap-1.5 sm:gap-2">
+              <Lightbulb className="w-3.5 h-3.5 text-[#3b82f6] mt-0.5 shrink-0 sm:w-4 sm:h-4" />
+              <p className="text-xs text-[#8e8e9a] leading-relaxed sm:text-sm">
                 {step.detailedExplanation}
               </p>
             </div>

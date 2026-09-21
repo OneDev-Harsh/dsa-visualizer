@@ -147,12 +147,123 @@ body::before {
   padding-right: 1rem;
 }
 
+/* ── Prism.js Tokyo Night theme ─────────────────────────────── */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #c0caf5;
+  background: transparent;
+  font-family: 'Geist Mono', 'Fira Code', 'JetBrains Mono', 'Cascadia Code', Consolas, monospace;
+  font-size: 13px;
+  line-height: 24px;
+  tab-size: 2;
+  text-shadow: none;
+  word-wrap: normal;
+  white-space: pre;
+}
+
+/* Tokens */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #565f89;
+  font-style: italic;
+}
+
+.token.punctuation {
+  color: #a9b1d6;
+}
+
+.token.namespace {
+  opacity: 0.7;
+}
+
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: #f7768e;
+}
+
+.token.boolean,
+.token.number {
+  color: #ff9e64;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.inserted {
+  color: #9ece6a;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string,
+.token.variable {
+  color: #89ddff;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.function,
+.token.class-name {
+  color: #7aa2f7;
+}
+
+.token.keyword {
+  color: #bb9af7;
+}
+
+.token.regex,
+.token.important {
+  color: #ff9e64;
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+/* Line highlighting for active lines */
+pre[class*="language-"].active-line {
+  background: rgba(122, 162, 247, 0.06);
+}
+
 /* Button press effect */
 .btn-press {
   transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 .btn-press:active {
   transform: scale(0.97);
+}
+
+/* Touch-friendly tap targets */
+@media (max-width: 640px) {
+  button, a, [role="button"] {
+    min-height: 44px;
+  }
+}
+
+/* Hide scrollbar on mobile filter pills */
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
 }
 
 /* Glow ring on focus */

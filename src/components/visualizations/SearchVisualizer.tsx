@@ -88,12 +88,12 @@ export default function SearchVisualizer({
   const isNotFound = foundIndex === -1;
 
   return (
-    <div className="flex flex-col items-center gap-4 w-full overflow-x-auto pb-4">
+    <div className="flex flex-col items-center gap-3 w-full overflow-x-auto pb-4 sm:gap-4">
       {/* Target display */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative flex items-center gap-3 px-5 py-3 rounded-xl bg-[#1e1e22] border border-[#222226]"
+        className="relative flex items-center gap-2 px-3 py-2 rounded-xl bg-[#1e1e22] border border-[#222226] sm:gap-3 sm:px-5 sm:py-3"
       >
         <motion.div
           className="absolute inset-0 rounded-xl border-2 border-primary/30"
@@ -109,7 +109,7 @@ export default function SearchVisualizer({
         <span className="text-xs text-[#6b6b76] uppercase tracking-wider font-medium">
           Target
         </span>
-        <span className="text-2xl font-bold font-mono text-primary">
+        <span className="text-2xl font-bold font-mono text-primary sm:text-3xl">
           {target}
         </span>
         {foundIndex !== undefined && foundIndex >= 0 && (
@@ -151,7 +151,7 @@ export default function SearchVisualizer({
         </motion.div>
       )}
 
-      <div className="relative flex items-end gap-1.5 sm:gap-2 min-w-max px-4">
+      <div className="relative flex items-end gap-1 min-w-max px-2 sm:gap-1.5 sm:px-4">
         <AnimatePresence mode="popLayout">
           {items.map((item, index) => {
             const pointerLabel = getPointerLabel(index, pointers);

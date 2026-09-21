@@ -74,7 +74,7 @@ export default function SortingVisualizer({
 
   return (
     <div className="flex flex-col items-center gap-2 w-full overflow-x-auto pb-4">
-      <div className="relative flex items-end gap-1 sm:gap-1.5 min-w-max px-4" style={{ height: '320px' }}>
+      <div className="relative flex items-end gap-1 min-w-max px-2 sm:gap-1.5 sm:px-4" style={{ height: '260px' }}>
         {/* Subtle grid pattern */}
         <div
           className="absolute inset-0 pointer-events-none opacity-[0.04]"
@@ -124,11 +124,11 @@ export default function SortingVisualizer({
                   <span className="h-[18px]" />
                 )}
 
-                <div className="flex flex-col items-center justify-end" style={{ height: '300px' }}>
+                <div className="flex flex-col items-center justify-end" style={{ height: '240px' }}>
                   <motion.div
                     layout
                     className={`
-                      relative w-9 sm:w-11 md:w-[3.25rem]
+                      relative w-7 sm:w-9 md:w-11
                       border rounded-t-md
                       flex items-start justify-center
                       pt-1.5
